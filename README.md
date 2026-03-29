@@ -168,33 +168,20 @@ $ sudo apt update
 ```
 
 ### Step 4: Configuring *sudo*
-Configure *sudo* via `sudo vi /etc/sudoers.d/<filename>`. `<filename>` shall not end in `~` or contain `.`.
+Configure *sudo* 
 ```
-$ sudo vi /etc/sudoers.d/<filename>
+$ sudo visudo
 ```
-To limit authentication using *sudo* to 3 attempts *(defaults to 3 anyway)* in the event of an incorrect password, add below line to the file.
-```
-Defaults        passwd_tries=3
-```
-To add a custom error message in the event of an incorrect password:
-```
-Defaults        badpass_message="<custom-error-message>"
-```
-###
+
 To log all *sudo* commands to `/var/log/sudo/<filename>`:
 ```
 $ sudo mkdir /var/log/sudo
-<~~~>
-Defaults        logfile="/var/log/sudo/<filename>"
-<~~~>
+$ sudo touch /var/log/sudo.log
 ```
-To archive all *sudo* inputs & outputs to `/var/log/sudo/`:
 ```
+Defaults        logfile="/var/log/sudo/sudo.log"
 Defaults        log_input,log_output
 Defaults        iolog_dir="/var/log/sudo"
-```
-To require *TTY*:
-```
 Defaults        requiretty
 ```
 To set *sudo* paths to `/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin`:
